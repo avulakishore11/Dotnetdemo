@@ -10,12 +10,12 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-   ditnet: buildConfiguration  
+  $buildConfiguration:  Build the dotnet
+
 
 steps:
-- step: step1
-  displayName: 'Build .NET Core project'
-  task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(buildConfiguration)
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      arguments: '--configuration $(buildConfiguration)'
+    displayName: 'dotnet build $(buildConfiguration)'
