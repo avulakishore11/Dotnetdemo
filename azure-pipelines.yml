@@ -14,8 +14,17 @@ variables:
 
 
 steps:
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'dotnet build'
-    arguments: '--configuration $(buildConfiguration)'
-  displayName: 'dotnet build $(buildConfiguration)'
+ - task: DotNetCoreCLI@2
+   displayName: restore successed
+   inputs:
+     command: 'restore'
+     projects: '**/*.csproj'
+     restoreArguments: '--configuration $(buildConfiguration)'
+     feedsToUse: 'select'
+ 
+ - task: DotNetCoreCLI@2
+   displayName: build successed
+   inputs:
+        command: build
+        arguments: '--configuration $(buildConfiguration)'
+      
