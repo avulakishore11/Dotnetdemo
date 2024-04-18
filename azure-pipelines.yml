@@ -12,12 +12,14 @@ pool:
 
 variables:
    Build configuration: dotnet build
+   dotnetVersion: '2.0'
   
 
 
 steps:
  - task: DotNetCoreCLI@2
    inputs:
+     majorVersion: $(dotnetVersion)
      command: 'build'
      projects: '**/*.csproj'
      arguments: '--configuration$(Build configuration)'
