@@ -11,26 +11,24 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-   Build configuration: dotnet build
-   
-  
-
+   BuildConfiguration: dotnet build
+   DotNetVersion: '3.1.x'  # Specify the desired .NET Core SDK version here
 
 steps:
- 
- 
- - task: DotNetCoreCLI@2
-   inputs:
-     command: 'restore'
-     projects: '**/*.csproj'
-     restoreArguments: '--configuration$(Build configuration)'
-     
+- task: UseDotNet@2
+  inputs:
+    version: '$(DotNetVersion)'  # Use the specified .NET Core SDK version
 
- 
- - task: DotNetCoreCLI@2
-   inputs:
-     command: build
-     projects: '**/*.csproj'
-     arguments: '--configuration$(Build configuration)'
-    
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    restoreArguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+
  
