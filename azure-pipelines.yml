@@ -12,29 +12,24 @@ pool:
 
 variables:
    Build configuration: dotnet build
-   dotnetVersion: '2.0'
+   
   
 
 
 steps:
- - task: DotNetCoreCLI@2
-   inputs:
-     command: 'custom'
-     projects: '**/*.csproj'
-     custom: 'install'
+ 
  
  - task: DotNetCoreCLI@2
    inputs:
      command: 'restore'
      projects: '**/*.csproj'
      restoreArguments: '--configuration$(Build configuration)'
-     feedsToUse: 'select'
+     
 
  
  - task: DotNetCoreCLI@2
    inputs:
-     majorVersion: $(dotnetVersion)
-     command: 'build'
+     command: build
      projects: '**/*.csproj'
      arguments: '--configuration$(Build configuration)'
     
